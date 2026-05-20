@@ -31,4 +31,4 @@ if __name__ == "__main__":
         print({error})
         print(error)
 
-    app.run(debug=True, port=8040)
+    app.run(debug=True)
