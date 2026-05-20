@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
@@ -18,9 +18,14 @@ class User(db.Model):
     email = db.Column(db.String(150), unique=True, nullable=False)
 
 
-@app.route("/")
-def home():
-    return "Flask + MySQL Connected"
+@app.route("/users", methods=["POST"])
+def create_user():
+    data = request.get_json()
+    new_user = User(name=data["name"], email=data["email"])
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({"message": "User Created Successfully!", "id": new_user.id}), 201
 
 
 if __name__ == "__main__":
