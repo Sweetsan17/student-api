@@ -21,9 +21,6 @@ class User(db.Model):
 @app.route("/users", methods=["POST"])
 def create_user():
     data = request.get_json()
-    if not data or not data.get("name") or not data.get("email"):
-        return jsonify({"error": "Name and email are required"}), 400
-
     new_user = User(name=data["name"], email=data["email"])
     db.session.add(new_user)
     db.session.commit()
