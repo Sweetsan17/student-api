@@ -37,6 +37,6 @@ if __name__ == "__main__":
 
     except Exception as e:
         print("ERROR: Database Connection Failed")
-        print(e)
+        print({e})
 
     app.run(debug=True)
